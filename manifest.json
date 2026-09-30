@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "谷歌翻译网页插件",
+  "version": "1.0.0",
+  "description": "选中网页文字即可调用谷歌翻译，支持内联浮层、弹窗翻译、右键菜单，以及 PDF 阅读器内译文叠加。",
+  "minimum_chrome_version": "110",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["contextMenus", "storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://translate.googleapis.com/*",
+    "https://translate.google.com/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "谷歌翻译",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["inject.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
